@@ -1,0 +1,1 @@
+CVE-2018-1999047	275		2018-08-23	2018-10-26	4.1	None	Remote	Low	Single system	None	Partial	None	A improper authorization vulnerability exists in Jenkins 2.137 and earlier, 2.121.2 and earlier in UpdateCenter.java that allows attackers to cancel a Jenkins restart scheduled through the update center.
