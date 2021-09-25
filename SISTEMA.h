@@ -10,14 +10,14 @@
 class Sistema
 {
 private:
-    std::vector<Registro> dados;
+    std::vector<Registro*> dados;
 public:
     Sistema();
     Sistema(std::string arqLog);
-    Registro getRegistros();
-    void PrintRegistros(Registro registro);
     void cabecalho();
     void menu();
+
+    void localizarCVE_ID();
 };
 
 #endif // SISTEMA_H

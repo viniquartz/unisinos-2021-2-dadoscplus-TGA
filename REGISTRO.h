@@ -8,7 +8,7 @@
 class Registro
 {
 private:
-    int idCVE;
+    std::string idCVE;
     int idCWE;
     std::string vulnerabilityTypes;
     //Date publishDate;
@@ -30,7 +30,7 @@ public:
     int openedDays(); 
     // Métodos getter
     //type getters();
-    int get_idCVE();
+    std::string get_idCVE();
     int get_idCWE();
     std::string get_vulnerabilityTypes();
     float get_scoreCVSS();
@@ -43,6 +43,8 @@ public:
     std::string get_availability();
     std::string get_description();
     // Métodos adicionais
+    //void printRegistros();
+    
 };
 
 #endif //REGISTRO_H

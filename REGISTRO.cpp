@@ -4,7 +4,6 @@
 using namespace std;
 
 Registro::Registro(){
-    idCVE = 0;
     idCWE = 0;
     scoreCVSS = 0;
 }
@@ -16,21 +15,37 @@ Registro::~Registro(){}
 
 Registro::Registro(string linha){
     stringstream RegStream(linha);
-    //Ignorar 9 caracteres da string
-    RegStream.seekg(9);
-
+    //ID
+    //getline(RegStream, idCVE, '\t');
     RegStream >> idCVE;
-    RegStream >> idCWE;
 
-    //Tratar wuando tiver Vulnerability
-    //RegStream >> vulnerabilityTypes;
+    //Tratar Quando tiver CWE
+    RegStream.ignore(1);
+    if(RegStream.peek()=='\t'){
+        RegStream.ignore(1);
+        this->idCWE = 0;
+    }
+    else{
+        RegStream >> this->idCWE;
+    }
+
+    //Tratar Quando tiver Vulnerability
+    RegStream.ignore(1);
+    if(RegStream.peek()=='\t'){
+        RegStream.ignore(1);
+        this->vulnerabilityTypes = "null";
+    }
+    else{
+        getline(RegStream, this->vulnerabilityTypes, '\t');
+    }
 
     //Date
     string aux_publishDate, aux_updateDate;
-    RegStream >> aux_publishDate;
-    RegStream >> aux_updateDate;
+    getline(RegStream, aux_publishDate, '\t');
+    getline(RegStream, aux_updateDate, '\t');
 
     RegStream >> scoreCVSS;
+    RegStream.ignore(1);
 
     getline(RegStream, gainedAccessLevel, '\t');
     getline(RegStream, access, '\t');
@@ -39,12 +54,12 @@ Registro::Registro(string linha){
     getline(RegStream, confidentialy, '\t');
     getline(RegStream, integrity, '\t');
     getline(RegStream, availability, '\t');
-    getline(RegStream, description, '\t');
+    getline(RegStream, description);
 }
 
 //~REGISTRO();
 //GETS
-int Registro::get_idCVE(){
+string Registro::get_idCVE(){
     return this->idCVE;
 }
 int Registro::get_idCWE(){
@@ -80,3 +95,12 @@ string Registro::get_availability(){
 string Registro::get_description(){
     return this->description;
 }
+
+//PRINT
+// void Registro::printRegistros(){
+//     vector<Registro*>::iterator it;
+//     for(it =  ; it != Registro->end() ; ++it)
+//     {
+//         cout << (*it)->get_idCVE() << endl;
+//     }
+// }

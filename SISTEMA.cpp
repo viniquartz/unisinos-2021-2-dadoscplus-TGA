@@ -17,11 +17,10 @@ Sistema::Sistema(string arqLog)
         {
             getline(myfile, linha);
             //SALVA NO CONSTRUTOR
-            Registro R(linha);
+            //Registro R(linha);
             //SALVA NO VECTOR
-            dados.push_back(R);
-            //Ponteiro logs
-            //logs.push_back(new Registro(linha));
+            //PONTEIRO
+            dados.push_back(new Registro(linha));
         }
     }
     else
@@ -34,39 +33,24 @@ Sistema::Sistema(string arqLog)
     myfile.close();
 }
 
-Registro Sistema::getRegistros()
-{
-    //!!!!!!!!PRECISO DE REPETICAO!!!!!!!!!!!
-    /*for(unsigned i=0; i<logs.size(); i++){
-        return logs[i];
-    }*/
-    //Ponteiro logs
-    //vector<Registro>::iterator it;
-    return dados.at(0);
-}
-
-void Sistema::PrintRegistros(Registro registro)
-{
-    cabecalho();
-
-    //EXIBIR REGISTROS PARA TODOS OS VECTORS
-    //cout << "CODIGO: " << *it->getCodigo() << endl;
-    cout << "ID CVE: " << registro.get_idCVE() << endl;
-    cout << "ID CWE: " << registro.get_idCWE() << endl;
-    cout << "vulnerabilityTypes: " << registro.get_vulnerabilityTypes() << endl;
-    cout << "scoreCVSS: " << registro.get_scoreCVSS() << endl;
-    cout << "gainedAccessLevel: " << registro.get_gainedAccessLevel() << endl;
-    cout << "access: " << registro.get_access() << endl;
-    cout << "complexity: " << registro.get_complexity() << endl;
-    cout << "authenticationP: " << registro.get_authenticationP() << endl;
-    cout << "confidentialy: " << registro.get_confidentialy() << endl;
-    cout << "integrity: " << registro.get_integrity() << endl;
-    cout << "availability: " << registro.get_availability() << endl;
-    cout << "description: " << registro.get_description() << endl;
-    cout << "=====//=====//=====//=====" << endl;
-    cout << endl;
-
-    //system("pause");
+void Sistema::localizarCVE_ID(){
+    vector<Registro*>::iterator it;
+    for(it = dados.begin() ; it != dados.end() ; ++it){
+        cout << "ID CVE: "<< (*it)->get_idCVE() << endl;
+        cout << "ID CWE: "<< (*it)->get_idCWE() << endl;
+        cout << "vulnerabilityTypes: "<< (*it)->get_vulnerabilityTypes() << endl;
+        cout << "scoreCVSS: "<< (*it)->get_scoreCVSS() << endl;
+        cout << "gainedAccessLevel: "<< (*it)->get_gainedAccessLevel() << endl;
+        cout << "access: "<< (*it)->get_access() << endl;
+        cout << "complexity: "<< (*it)->get_complexity() << endl;
+        cout << "authenticationP: "<< (*it)->get_authenticationP() << endl;
+        cout << "confidentialy: "<< (*it)->get_confidentialy() << endl;
+        cout << "integrity: "<< (*it)->get_integrity() << endl;
+        cout << "availability: "<< (*it)->get_availability() << endl;
+        cout << "description: "<< (*it)->get_description() << endl;
+        cout << "=====//=====//=====//=====" << endl;
+        cout << endl;
+    }
 }
 
 void Sistema::cabecalho()
@@ -105,20 +89,19 @@ void Sistema::menu()
         else if (op == 2)
         {
             cout << "op=2" << endl;
-            //lfiltro();
             system("pause");
         }
         else if (op == 3)
         {
             cout << "op=3" << endl;
-            //vfiltro();
             system("pause");
         }
         else if (op == 4)
         {
             cout << "op=4" << endl;
             //CHAMA METODO PRINT
-            sistema.PrintRegistros(sistema.getRegistros());
+            //sistema.PrintRegistros(sistema.getRegistros());
+            sistema.localizarCVE_ID();
             system("pause");
         }
         else
