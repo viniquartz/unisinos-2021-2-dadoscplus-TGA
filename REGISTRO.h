@@ -44,7 +44,14 @@ public:
     std::string get_description();
     // Métodos adicionais
     //void printRegistros();
-    
+
+    //SERIALIZAR
+    string toExport();
+
+    //ID CVE
+    void print_localizarCVE_ID();
+    //DESCRIPTION
+    void print_localizarDescription();
 };
 
 #endif //REGISTRO_H

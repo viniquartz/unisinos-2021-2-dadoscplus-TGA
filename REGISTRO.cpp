@@ -96,11 +96,16 @@ string Registro::get_description(){
     return this->description;
 }
 
-//PRINT
-// void Registro::printRegistros(){
-//     vector<Registro*>::iterator it;
-//     for(it =  ; it != Registro->end() ; ++it)
-//     {
-//         cout << (*it)->get_idCVE() << endl;
-//     }
-// }
+void Registro::print_localizarCVE_ID(){
+    cout << "ID CWE: " << get_idCWE() << endl;
+    cout << "scoreCVSS: " << get_scoreCVSS() << endl;
+    cout << endl << "\t\t=====//=====//=====//=====//=====" << endl;
+    cout << endl;
+}
+
+void Registro::print_localizarDescription(){
+    cout << "ID CVE: " << get_idCVE() << endl;
+    cout << "scoreCVSS: " << get_scoreCVSS() << endl;
+    cout << endl << "\t\t=====//=====//=====//=====//=====" << endl;
+    cout << endl;
+}
