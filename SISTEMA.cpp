@@ -33,6 +33,14 @@ Sistema::Sistema(string arqLog)
     myfile.close();
 }
 
+/*Sistema::~Sistema(){
+    vector<Registro *>::iterator it;
+    for (it = dados.begin(); it != dados.end(); ++it){
+        delete *it;
+        this->dados.clear();
+    }
+}*/
+
 void Sistema::temp_verificarRegidtros()
 {
     vector<Registro *>::iterator it;
@@ -104,7 +112,8 @@ void Sistema::localizarDescription()
     cout << "DIGITE DESCRICAO: ";
     fflush(stdin);
     getline(cin, consultaDescription);
-    cout << endl << consultaDescription << endl;
+    //cout << endl << consultaDescription << endl;
+    //system("pause");
     vector<Registro *>::iterator it;
     for (it = dados.begin(); it != dados.end(); ++it)
     {
@@ -133,7 +142,7 @@ void Sistema::cabecalho_exportData()
 }
 
 void Sistema::exportData(){
-    float begin_scoreCVSS, end_scoreCVSS;
+    float begin_scoreCVSS = 0, end_scoreCVSS = 0;
     cabecalho_exportData();
     cout << "| DIGITE AS INFORMACOES SOLICITADAS PARA EXPORTAR O ARQUIVO |" << endl;
     //PUBLISH DATE
@@ -144,7 +153,7 @@ void Sistema::exportData(){
     // fflush(stdin);
     // cin >> end_scoreCVSS;
     //CVSS SCORE
-    cout << "DIGITE VALOR INICIAL DO SCORE CVSS: ";
+    cout << endl << "DIGITE VALOR INICIAL DO SCORE CVSS: ";
     fflush(stdin);
     cin >> begin_scoreCVSS;
     cout << "DIGITE VALOR FINAL DO SCORE CVSS: ";
@@ -152,28 +161,37 @@ void Sistema::exportData(){
     cin >> end_scoreCVSS;
 
     cabecalho_exportData();
-    cout << endl << "CVSS SCORE - INICIAL: " << begin_scoreCVSS << "FINAL:" << end_scoreCVSS;
+    cout << endl << "CVSS SCORE -> INICIAL: " << begin_scoreCVSS << " FINAL: " << end_scoreCVSS;
     //cout PUBLISH DATE
     if (end_scoreCVSS < begin_scoreCVSS){
         cout << endl << "VALORES ERRADOS" << endl;
     }
     else{
+        int tam = 0;
         string nameArchive;
-        string nameDirectory = "C:\\tmp";
+        string nameDirectory = "C:\\tmp\\";
         cout << endl << "DIGITE NOME DO ARQUIVO(SEM EXTENSAO): ";
         fflush(stdin);
         getline(cin, nameArchive);
-        cout << endl << "ARQUIVO " << nameArchive+".txt" << "SERA EXPORTADO PARA A PASTA " << nameDirectory << endl;
+        cout << endl << "| ARQUIVO EXPORTADO PARA " << nameDirectory << nameArchive+".txt |" << endl;
         vector<Registro *>::iterator it;
         fstream arch_expo(nameDirectory+nameArchive+".txt", iostream::out | iostream::trunc);
         if(arch_expo.is_open()){
             arch_expo << "CVE ID	CWE ID	Vulnerability Types	Publish Date	Update Date	CVSS Score	Gained Access Level	Access	Complexity	Authentication	Confidentialy	Integrity	Availability	Description";
             for (it = dados.begin(); it != dados.end(); ++it){
-                if(begin_scoreCVSS <= (*it)->get_scoreCVSS() && (*it)->get_scoreCVSS() <= end_scoreCVSS){
+                if(begin_scoreCVSS >= (*it)->get_scoreCVSS() && (*it)->get_scoreCVSS() <= end_scoreCVSS){
                     arch_expo << endl << (*it)->toExport();
+                    tam++;
                 }
             }
             arch_expo.close();
+            cout << endl << tam << " REGISTROS ADICIONADOS!" << endl;
+            system("pause");
+        }
+        else
+        {
+            cout << "Arquivo nao carregado!" << endl;
+            system("pause");
         }
     }
 }
@@ -197,14 +215,15 @@ void Sistema::menu()
     {
         cabecalho();
         cout << "||MENU||" << endl
+             << endl
+             << "1-LOCALIZAR POR 'CVE ID'" << endl
+             << "2-LOCALIZAR POR 'DESCRIPTION'" << endl
+             << "3-HISTOGRAMA 'SCORE'" << endl
+             << "4-EXPORTAR DADOS" << endl
+             << "5-LISTAR REGISTROS" << endl
+             << "0-SAIR" << endl
              << endl;
-        cout << "1-LOCALIZAR POR 'CVE ID'" << endl;
-        cout << "2-LOCALIZAR POR 'DESCRIPTION'" << endl;
-        cout << "3-HISTOGRAMA 'SCORE'" << endl;
-        cout << "4-EXPORTAR DADOS" << endl;
-        cout << "0-SAIR" << endl
-             << endl;
-        cout << "Selecione a opcao desejada: ";
+        cout << "SELECIONE A OPCAO DESEJADA(DE 0 A 5): ";
         cin >> op;
         if (op == 1)
         {
@@ -222,8 +241,11 @@ void Sistema::menu()
         else if (op == 4)
         {
             cout << "op=4" << endl;
-            //CHAMA METODO PRINT
-            //sistema.PrintRegistros(sistema.getRegistros());
+            sistema.exportData();
+        }
+        else if (op == 5)
+        {
+            cout << "op=5" << endl;
             sistema.temp_verificarRegidtros();
             system("pause");
         }
@@ -236,6 +258,7 @@ void Sistema::menu()
             }
             if (op == 0)
             {
+                //sistema.~Sistema();
                 cout << "FECHANDO PROGRAMA!!" << endl;
             }
         }

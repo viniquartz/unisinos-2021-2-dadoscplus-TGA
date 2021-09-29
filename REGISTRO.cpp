@@ -57,6 +57,42 @@ Registro::Registro(string linha){
     getline(RegStream, description);
 }
 
+//SERIALIZAR
+string Registro::toExport(){
+    stringstream ss_toExport;
+    ss_toExport << get_idCVE() << '\t'
+                << get_idCWE() << '\t'
+                << get_vulnerabilityTypes() << '\t'
+                //<< this->publishDate << '\t'
+                //<< this->updateDate << '\t'
+                << get_scoreCVSS() << '\t'
+                << get_gainedAccessLevel() << '\t'
+                << get_access() << '\t'
+                << get_complexity() << '\t'
+                << get_authenticationP() << '\t'
+                << get_confidentialy() << '\t'
+                << get_integrity() << '\t'
+                << get_availability() << '\t'
+                << get_description();
+    return ss_toExport.str();
+}
+
+//ID CVE
+void Registro::print_localizarCVE_ID(){
+    cout << "ID CWE: " << get_idCWE() << endl;
+    cout << "scoreCVSS: " << get_scoreCVSS() << endl;
+    cout << endl << "\t\t=====//=====//=====//=====//=====" << endl;
+    cout << endl;
+}
+//DESCRIPTION
+void Registro::print_localizarDescription(){
+    cout << "ID CVE: " << get_idCVE() << endl;
+    cout << "ID CVE: " << get_vulnerabilityTypes() << endl;
+    cout << "scoreCVSS: " << get_scoreCVSS() << endl;
+    cout << endl << "\t\t=====//=====//=====//=====//=====" << endl
+         << endl;
+}
+
 //~REGISTRO();
 //GETS
 string Registro::get_idCVE(){
@@ -94,18 +130,4 @@ string Registro::get_availability(){
 }
 string Registro::get_description(){
     return this->description;
-}
-
-void Registro::print_localizarCVE_ID(){
-    cout << "ID CWE: " << get_idCWE() << endl;
-    cout << "scoreCVSS: " << get_scoreCVSS() << endl;
-    cout << endl << "\t\t=====//=====//=====//=====//=====" << endl;
-    cout << endl;
-}
-
-void Registro::print_localizarDescription(){
-    cout << "ID CVE: " << get_idCVE() << endl;
-    cout << "scoreCVSS: " << get_scoreCVSS() << endl;
-    cout << endl << "\t\t=====//=====//=====//=====//=====" << endl;
-    cout << endl;
 }

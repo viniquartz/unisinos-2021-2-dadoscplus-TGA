@@ -46,7 +46,7 @@ public:
     //void printRegistros();
 
     //SERIALIZAR
-    string toExport();
+    std::string toExport();
 
     //ID CVE
     void print_localizarCVE_ID();
