@@ -12,8 +12,12 @@ class Sistema
 private:
     std::vector<Registro*> dados;
 public:
+    //Construtor
     Sistema();
     Sistema(std::string arqLog);
+    //Destrutor
+    //~Sistema();
+
     //AUX
     void cabecalho();
     void menu();

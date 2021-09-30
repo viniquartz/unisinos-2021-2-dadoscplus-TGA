@@ -256,7 +256,7 @@ void Sistema::menu()
                 cout << "OPCAO INVALIDA!! TENTE NOVAMENTE." << endl;
                 system("pause");
             }
-            if (op == 0)
+            else if (op == 0)
             {
                 //sistema.~Sistema();
                 cout << "FECHANDO PROGRAMA!!" << endl;
