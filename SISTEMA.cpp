@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctype.h>
+#include <fstream>
 #include "SISTEMA.h"
 
 using namespace std;
@@ -142,6 +143,7 @@ void Sistema::cabecalho_exportData()
 }
 
 void Sistema::exportData(){
+    Registro R;
     float begin_scoreCVSS = 0, end_scoreCVSS = 0;
     cabecalho_exportData();
     cout << "| DIGITE AS INFORMACOES SOLICITADAS PARA EXPORTAR O ARQUIVO |" << endl;
@@ -181,6 +183,7 @@ void Sistema::exportData(){
             for (it = dados.begin(); it != dados.end(); ++it){
                 if(begin_scoreCVSS >= (*it)->get_scoreCVSS() && (*it)->get_scoreCVSS() <= end_scoreCVSS){
                     arch_expo << endl << (*it)->toExport();
+                    //arch_expo << R;
                     tam++;
                 }
             }

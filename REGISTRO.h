@@ -3,6 +3,7 @@
 
 #include <string>
 #include <sstream>
+#include <fstream>
 //#include "DATAHORA.h"
 
 class Registro
@@ -47,6 +48,7 @@ public:
 
     //SERIALIZAR
     std::string toExport();
+    //friend ostream& operator<<(ostream& os, const Registro& registro);
 
     //ID CVE
     void print_localizarCVE_ID();

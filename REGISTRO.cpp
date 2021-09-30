@@ -76,6 +76,23 @@ string Registro::toExport(){
                 << get_description();
     return ss_toExport.str();
 }
+/*
+friend ostream& operator<<(ostream& os, const Registro& dados) {
+    os << dados.idCVE << '\t';
+    os << dados.idCWE << '\t';
+    os << dados.vulnerabilityTypes << '\t';
+    os << dados.scoreCVSS << '\t';
+    os << dados.gainedAccessLevel << '\t';
+    os << dados.access << '\t';
+    os << dados.complexity << '\t';
+    os << dados.authentication << '\t';
+    os << dados.confidentialy << '\t';
+    os << dados.integrity << '\t';
+    os << dados.availability << '\t';
+    os << dados.description << '\t'<< endl;
+    return os;
+}*/
+
 
 //ID CVE
 void Registro::print_localizarCVE_ID(){
