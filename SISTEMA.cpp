@@ -18,10 +18,6 @@ Sistema::Sistema(string arqLog)
         while (myfile.good())
         {
             getline(myfile, linha);
-            //SALVA NO CONSTRUTOR
-            //Registro R(linha);
-            //SALVA NO VECTOR
-            //PONTEIRO
             dados.push_back(new Registro(linha));
         }
     }
@@ -108,37 +104,23 @@ void Sistema::cabecalho_localizarDescription()
 
 void Sistema::localizarDescription()
 {
-    //Melhorar
     string consultaDescription;
-    int contador = 0;
-    int aux = 0;
+    int contador_tem = 0;
+    int contador_ntem = 0;
+
     cabecalho_localizarDescription();
     cout << "DIGITE DESCRICAO: ";
     fflush(stdin);
     getline(cin, consultaDescription);
     
     vector<Registro *>::iterator it;
-    // it = find_if(dados.begin(), dados.end(), [&consultaDescription](Registro*& r) {return r->get_description() == consultaDescription;} );
-    // if (it != dados.end()){
-    //     cout << consultaDescription << endl;
-    //     cout << "" << (*it)->get_description() << endl;
-    //     contador++;
-    //     cout << endl << "CONTADOR: " << contador << endl;
-    //     system("pause");
-    // }
-    // else{
-    //     aux++;
-    //     cout << "DESCRICAO NAO ENCONTRADA: " << endl;
-    //     cout << "AUX: " << aux << endl;
-    //     system("pause");
-    // }
     for (it = dados.begin(); it != dados.end(); ++it)
     {
-        
-        if ((*it)->get_description().find(consultaDescription) < sizeof( (*it)->get_description() ))
+        size_t found = (*it)->get_description().find(consultaDescription);
+        if (found!=std::string::npos)//https://www.cplusplus.com/reference/string/string/find/
         {
             cout << consultaDescription << endl;
-            contador++;
+            contador_tem++;
             cabecalho_localizarDescription();
             cout << "DESCRICAO ENCONTRADA: ";
             cout << "" << (*it)->get_description() << endl;
@@ -149,14 +131,11 @@ void Sistema::localizarDescription()
             system("pause");
         }
         else{
-            aux++;
-            cout << "DESCRICAO NAO ENCONTRADA: " << endl;
-            system("pause");
+            contador_ntem++;
         }
-        
     }
-    cout << endl << "CONTADOR: " << contador << endl
-             << "AUX: " << aux << endl;
+    cout << endl << "->DESCRICAO ENCONTRADA: " << contador_tem << " VEZES" << endl
+             << "->DESCRICAO NAO ENCONTRADA: " << contador_ntem << " VEZES" << endl;
     system("pause");
 }
 
