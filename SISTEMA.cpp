@@ -119,9 +119,9 @@ void Sistema::localizarDescription()
         size_t found = (*it)->get_description().find(consultaDescription);
         if (found!=std::string::npos)//https://www.cplusplus.com/reference/string/string/find/
         {
-            cout << consultaDescription << endl;
             contador_tem++;
             cabecalho_localizarDescription();
+            cout << "PESQUISA DA DESCRICAO: "<< consultaDescription << endl << endl;
             cout << "DESCRICAO ENCONTRADA: ";
             cout << "" << (*it)->get_description() << endl;
             cout << endl << "| INFORMACES ABAIXO |" << endl
