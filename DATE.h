@@ -19,5 +19,21 @@ public:
     int getStructDAY();
     int getStructMONTH();
     int getStructYEAR();
+
+    // inline bool operator<(const DATE& param) {
+    //     return datahora < param.datahora;
+    // }
+    // inline bool operator<=(const DATE& param) {
+    //     return datahora <= param.datahora;
+    // }
+    // inline bool operator>(const DATE& param) {
+    //     return datahora > param.datahora;
+    // }
+    // inline bool operator>=(const DATE& param) {
+    //     return datahora >= param.datahora;
+    // }
+    // inline bool operator==(const DATE& param) {
+    //     return datahora == param.datahora;
+    // }
 };
 #endif

@@ -220,17 +220,38 @@ void Sistema::cabecalho_exportData()
 }
 
 void Sistema::exportData(){
-    Registro R;
+    //Registro R;
     float begin_scoreCVSS = 0, end_scoreCVSS = 0;
+    DATE* begin_publishdate;
+    DATE* end_publishdate;
+
+    string dia1, mes1, ano1 = "2018";
+    string dia2, mes2, ano2 = "2018";
+
     cabecalho_exportData();
     cout << "| DIGITE AS INFORMACOES SOLICITADAS PARA EXPORTAR O ARQUIVO |" << endl;
+    
     //PUBLISH DATE
-    // cout << "DIGITE VALOR INICIAL DO SCORE CVSS: ";
-    // fflush(stdin);
-    // cin >> begin_scoreCVSS;
-    // cout << "DIGITE VALOR FINAL DO SCORE CVSS: ";
-    // fflush(stdin);
-    // cin >> end_scoreCVSS;
+    cout << endl << "| DIGITE VALOR INICIAL DE PUBLISH DATE DE 2018 |"
+         << endl << "DIGITE DIA: ";
+    fflush(stdin);
+    cin >> dia1;
+    cout << "DIGITE MES: ";
+    fflush(stdin);
+    cin >> mes1;
+    string data_inicial = ano1+"-"+mes1+"-"+dia1;
+    begin_publishdate = new DATE(data_inicial);
+    
+    cout << endl << "| DIGITE VALOR FINAL DE PUBLISH DATE DE 2018 |"
+         << endl << "DIGITE DIA: ";
+    fflush(stdin);
+    cin >> dia2;
+    cout << "DIGITE MES: ";
+    fflush(stdin);
+    cin >> mes2;
+    string data_final = ano2+"-"+mes2+"-"+dia2;
+    end_publishdate = new DATE(data_final);
+
     //CVSS SCORE
     cout << endl << "DIGITE VALOR INICIAL DO SCORE CVSS: ";
     fflush(stdin);
@@ -241,7 +262,8 @@ void Sistema::exportData(){
 
     cabecalho_exportData();
     cout << endl << "CVSS SCORE -> INICIAL: " << begin_scoreCVSS << " FINAL: " << end_scoreCVSS;
-    //cout PUBLISH DATE
+    cout << endl << "PUBLISH DATE -> INICIAL: " << data_inicial << " FINAL: " << data_final << endl;
+
     if (end_scoreCVSS < begin_scoreCVSS){
         cout << endl << "VALORES ERRADOS" << endl;
     }
@@ -259,9 +281,12 @@ void Sistema::exportData(){
             arch_expo << "CVE ID	CWE ID	Vulnerability Types	Publish Date	Update Date	CVSS Score	Gained Access Level	Access	Complexity	Authentication	Confidentialy	Integrity	Availability	Description";
             for (it = dados.begin(); it != dados.end(); ++it){
                 if((*it)->get_scoreCVSS() >= begin_scoreCVSS  && (*it)->get_scoreCVSS() <= end_scoreCVSS){
+                    //Filtrar intervalo de datas
+                    //if((*it)->publishDate->getStructTM() >= data_inicial && (*it)->publishDate->getStructTM() <= data_final){
                     arch_expo << endl << (*it)->toExport();
                     //arch_expo << R;
                     tam++;
+                    //}
                 }
             }
             arch_expo.close();

@@ -69,6 +69,8 @@ string Registro::toExport(){
     ss_toExport << get_idCVE() << '\t'
                 << get_idCWE() << '\t'
                 << get_vulnerabilityTypes() << '\t'
+                //<< publishDate->getStructDAY() << "-" << publishDate->getStructMONTH() << "-" << publishDate->getStructYEAR() << endl;
+                //<< updateDate->getStructDAY() << "-" << updateDate->getStructMONTH() << "-" << updateDate->getStructYEAR() << endl;
                 //<< this->publishDate << '\t'
                 //<< this->updateDate << '\t'
                 << get_scoreCVSS() << '\t'
