@@ -56,6 +56,7 @@ void Sistema::temp_verificarRegidtros()
         cout << "integrity: " << (*it)->get_integrity() << endl;
         cout << "availability: " << (*it)->get_availability() << endl;
         cout << "description: " << (*it)->get_description() << endl;
+        cout << "Open Days: " << (*it)->openedDays() << endl;
         cout << "=====//=====//=====//=====" << endl;
         cout << endl;
     }
@@ -134,8 +135,8 @@ void Sistema::localizarDescription()
             contador_ntem++;
         }
     }
-    cout << endl << "->DESCRICAO ENCONTRADA: " << contador_tem << " VEZES" << endl
-             << "->DESCRICAO NAO ENCONTRADA: " << contador_ntem << " VEZES" << endl;
+    cout << endl << "-> DESCRICAO ENCONTRADA: " << contador_tem << " VEZES" << endl
+             << "-> DESCRICAO NAO ENCONTRADA: " << contador_ntem << " VEZES" << endl;
     system("pause");
 }
 
@@ -288,7 +289,7 @@ void Sistema::cabecalho()
 void Sistema::menu()
 {
     //CHAMA CONSTRUTOR COM NOME DO ARQUIVO
-    Sistema sistema("cve2018.txt");
+    Sistema sistema("cve.txt");
     int op;
     do
     {

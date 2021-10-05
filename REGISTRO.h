@@ -5,7 +5,8 @@
 #include <sstream>
 #include <fstream>
 #include <algorithm>
-//#include "DATAHORA.h"
+
+#include "DATE.h"
 
 class Registro
 {
@@ -13,8 +14,8 @@ private:
     std::string idCVE;
     int idCWE;
     std::string vulnerabilityTypes;
-    //Date publishDate;
-    //Date updateDate;
+    DATE* publishDate;
+    DATE* updateDate;
     float scoreCVSS;
     std::string gainedAccessLevel;
     std::string access;

@@ -9,7 +9,9 @@ Registro::Registro(){
 }
 
 int Registro::openedDays(){
-    return 0;
+    double open;
+    open = difftime(mktime(updateDate->getStructTM()),mktime(publishDate->getStructTM()));
+    return open;
 }
 
 //Registro::~Registro(){}
@@ -43,7 +45,10 @@ Registro::Registro(string linha){
     //Date
     string aux_publishDate, aux_updateDate;
     getline(RegStream, aux_publishDate, '\t');
+    publishDate = new DATE(aux_publishDate);
+    
     getline(RegStream, aux_updateDate, '\t');
+    updateDate = new DATE(aux_updateDate);
 
     RegStream >> scoreCVSS;
     RegStream.ignore(1);
@@ -99,14 +104,18 @@ friend ostream& operator<<(ostream& os, const Registro& dados) {
 void Registro::print_localizarCVE_ID(){
     cout << "ID CWE: " << get_idCWE() << endl;
     cout << "scoreCVSS: " << get_scoreCVSS() << endl;
+    cout << "Open Days: " << openedDays() << endl;
     cout << endl << "\t\t=====//=====//=====//=====//=====" << endl;
     cout << endl;
 }
 //DESCRIPTION
 void Registro::print_localizarDescription(){
     cout << "ID CVE: " << get_idCVE() << endl;
-    cout << "ID CVE: " << get_vulnerabilityTypes() << endl;
-    cout << "scoreCVSS: " << get_scoreCVSS() << endl;
+    cout << "VulnerabilityTypes: " << get_vulnerabilityTypes() << endl;
+    cout << "ScoreCVSS: " << get_scoreCVSS() << endl;
+    cout << "PublishDate: " << publishDate->getStructDAY() << "/" << publishDate->getStructMONTH() << "/" << publishDate->getStructYEAR() << endl;
+    cout << "UpdateDate: " << updateDate->getStructDAY() << "/" << updateDate->getStructMONTH() << "/" << updateDate->getStructYEAR() << endl;
+    cout << "Open Days: " << openedDays() << endl;
     cout << endl << "\t\t=====//=====//=====//=====//=====" << endl
          << endl;
 }

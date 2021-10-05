@@ -1,5 +1,5 @@
-g++ -c main.cpp REGISTRO.cpp SISTEMA.cpp
-@REM DATAHORA.cpp
+g++ -c main.cpp REGISTRO.cpp SISTEMA.cpp DATE.cpp
+@REM DATE.cpp
 
-g++ -o main.exe main.o REGISTRO.o SISTEMA.o
-@REM DATAHORA.o
+g++ -o main.exe main.o REGISTRO.o SISTEMA.o DATE.o
+@REM DATE.o
