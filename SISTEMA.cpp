@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <ctype.h>
 #include <fstream>
 #include "SISTEMA.h"
@@ -109,17 +110,35 @@ void Sistema::localizarDescription()
 {
     //Melhorar
     string consultaDescription;
+    int contador = 0;
+    int aux = 0;
     cabecalho_localizarDescription();
     cout << "DIGITE DESCRICAO: ";
     fflush(stdin);
     getline(cin, consultaDescription);
-    //cout << endl << consultaDescription << endl;
-    //system("pause");
+    
     vector<Registro *>::iterator it;
+    // it = find_if(dados.begin(), dados.end(), [&consultaDescription](Registro*& r) {return r->get_description() == consultaDescription;} );
+    // if (it != dados.end()){
+    //     cout << consultaDescription << endl;
+    //     cout << "" << (*it)->get_description() << endl;
+    //     contador++;
+    //     cout << endl << "CONTADOR: " << contador << endl;
+    //     system("pause");
+    // }
+    // else{
+    //     aux++;
+    //     cout << "DESCRICAO NAO ENCONTRADA: " << endl;
+    //     cout << "AUX: " << aux << endl;
+    //     system("pause");
+    // }
     for (it = dados.begin(); it != dados.end(); ++it)
     {
+        
         if ((*it)->get_description().find(consultaDescription) < sizeof( (*it)->get_description() ))
         {
+            cout << consultaDescription << endl;
+            contador++;
             cabecalho_localizarDescription();
             cout << "DESCRICAO ENCONTRADA: ";
             cout << "" << (*it)->get_description() << endl;
@@ -129,9 +148,87 @@ void Sistema::localizarDescription()
             cout << endl;
             system("pause");
         }
-        // CRIAR UM ELSE
-        // CRIAR UMA REPETIÇÃO PARA O USUARIO TENTAR NOVAMENTE OU VOLTAR AO MENU
+        else{
+            aux++;
+            cout << "DESCRICAO NAO ENCONTRADA: " << endl;
+            system("pause");
+        }
+        
     }
+    cout << endl << "CONTADOR: " << contador << endl
+             << "AUX: " << aux << endl;
+    system("pause");
+}
+
+void Sistema::cabecalho_histograma(){
+    system("cls");
+    cabecalho();
+    cout << "\t\t| HISTOGRAMA DOS REGISTROS |" << endl
+         << endl;
+}
+
+void Sistema::histograma_grafico(int grupo){
+    int porcentagem = 100;
+    int escala = grupo * porcentagem / dados.size();
+    cout << "\t      " << grupo << "\t\t     " << escala << "%" << " = [";
+    for(int i = 0; i <= porcentagem; i++){
+        if(i < escala){
+            cout << "=";
+        }
+        else{
+            cout << ".";
+        }
+    }
+}
+
+void Sistema::histograma(){
+    int grupo0 = 0, grupo1 = 0, grupo2 = 0, grupo3 = 0, grupo4 = 0, grupo5 = 0, grupo6 = 0, grupo7 = 0, grupo8 = 0, grupo9 = 0;
+    vector<Registro *>::iterator it;
+    for(it = dados.begin(); it != dados.end(); it++){
+        if((*it)->get_scoreCVSS() >= 0.0 && (*it)->get_scoreCVSS() <= 0.9){
+            grupo0++;
+        }
+        else if((*it)->get_scoreCVSS() >= 1.0 && (*it)->get_scoreCVSS() <= 1.9){
+            grupo1++;
+        }
+        else if((*it)->get_scoreCVSS() >= 2.0 && (*it)->get_scoreCVSS() <= 2.9){
+            grupo2++;
+        }
+        else if((*it)->get_scoreCVSS() >= 3.0 && (*it)->get_scoreCVSS() <= 3.9){
+            grupo3++;
+        }
+        else if((*it)->get_scoreCVSS() >= 4.0 && (*it)->get_scoreCVSS() <= 4.9){
+            grupo4++;
+        }
+        else if((*it)->get_scoreCVSS() >= 5.0 && (*it)->get_scoreCVSS() <= 5.9){
+            grupo5++;
+        }
+        else if((*it)->get_scoreCVSS() >= 6.0 && (*it)->get_scoreCVSS() <= 6.9){
+            grupo6++;
+        }
+        else if((*it)->get_scoreCVSS() >= 7.0 && (*it)->get_scoreCVSS() <= 7.9){
+            grupo7++;
+        }
+        else if((*it)->get_scoreCVSS() >= 8.0 && (*it)->get_scoreCVSS() <= 8.9){
+            grupo8++;
+        }
+        else if((*it)->get_scoreCVSS() >= 9.0 && (*it)->get_scoreCVSS() <= 10.0){
+            grupo9++;
+        }
+    }
+    cabecalho_histograma();
+    cout << "\t| SCORE |\t| QUANTIDADE |\t| PERCENTUAL |" << endl;
+    cout << "     de 0.0 ate 0.9"; histograma_grafico(grupo0); cout << "]" << endl;
+    cout << "     de 1.0 ate 1.9"; histograma_grafico(grupo1); cout << "]" << endl;
+    cout << "     de 2.0 ate 2.9"; histograma_grafico(grupo2); cout << "]" << endl;
+    cout << "     de 3.0 ate 3.9"; histograma_grafico(grupo3); cout << "]" << endl;
+    cout << "     de 4.0 ate 4.9"; histograma_grafico(grupo4); cout << "]" << endl;
+    cout << "     de 5.0 ate 5.9"; histograma_grafico(grupo5); cout << "]" << endl;
+    cout << "     de 6.0 ate 6.9"; histograma_grafico(grupo6); cout << "]" << endl;
+    cout << "     de 7.0 ate 7.9"; histograma_grafico(grupo7); cout << "]" << endl;
+    cout << "     de 8.0 ate 8.9"; histograma_grafico(grupo8); cout << "]" << endl;
+    cout << "     de 9.0 ate 10.0"; histograma_grafico(grupo9); cout << "]" << endl;
+    system("pause");
 }
 
 void Sistema::cabecalho_exportData()
@@ -238,17 +335,14 @@ void Sistema::menu()
         }
         else if (op == 3)
         {
-            cout << "op=3" << endl;
-            system("pause");
+            sistema.histograma();
         }
         else if (op == 4)
         {
-            cout << "op=4" << endl;
             sistema.exportData();
         }
         else if (op == 5)
         {
-            cout << "op=5" << endl;
             sistema.temp_verificarRegidtros();
             system("pause");
         }

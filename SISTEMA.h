@@ -17,7 +17,6 @@ public:
     Sistema(std::string arqLog);
     //Destrutor
     //~Sistema();
-
     //AUX
     void cabecalho();
     void menu();
@@ -29,6 +28,10 @@ public:
     //DESCRIPTION
     void cabecalho_localizarDescription();
     void localizarDescription();
+    //HISTOGRAMA
+    void cabecalho_histograma();
+    void histograma_grafico(int grupo);
+    void histograma();
     //EXPORT DATA
     void cabecalho_exportData();
     void exportData();

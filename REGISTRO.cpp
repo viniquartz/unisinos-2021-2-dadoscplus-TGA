@@ -11,7 +11,8 @@ Registro::Registro(){
 int Registro::openedDays(){
     return 0;
 }
-Registro::~Registro(){}
+
+//Registro::~Registro(){}
 
 Registro::Registro(string linha){
     stringstream RegStream(linha);
@@ -110,7 +111,6 @@ void Registro::print_localizarDescription(){
          << endl;
 }
 
-//~REGISTRO();
 //GETS
 string Registro::get_idCVE(){
     return this->idCVE;

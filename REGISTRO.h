@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 //#include "DATAHORA.h"
 
 class Registro
@@ -24,13 +25,14 @@ private:
     std::string availability;
     std::string description;
 public:
+    //Construtor
     Registro();
     Registro(std::string linha);
-    ~Registro();
+    //Destrutor
+    //~Registro();
     // Quantidade de dias que a vulnerabilidade ficou em aberto
     int openedDays(); 
-    // Métodos getter
-    //type getters();
+    // GETS
     std::string get_idCVE();
     int get_idCWE();
     std::string get_vulnerabilityTypes();
@@ -43,13 +45,9 @@ public:
     std::string get_integrity();
     std::string get_availability();
     std::string get_description();
-    // Métodos adicionais
-    //void printRegistros();
-
     //SERIALIZAR
     std::string toExport();
     //friend ostream& operator<<(ostream& os, const Registro& registro);
-
     //ID CVE
     void print_localizarCVE_ID();
     //DESCRIPTION
