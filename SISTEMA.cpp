@@ -257,7 +257,7 @@ void Sistema::exportData(){
         if(arch_expo.is_open()){
             arch_expo << "CVE ID	CWE ID	Vulnerability Types	Publish Date	Update Date	CVSS Score	Gained Access Level	Access	Complexity	Authentication	Confidentialy	Integrity	Availability	Description";
             for (it = dados.begin(); it != dados.end(); ++it){
-                if(begin_scoreCVSS >= (*it)->get_scoreCVSS() && (*it)->get_scoreCVSS() <= end_scoreCVSS){
+                if((*it)->get_scoreCVSS() >= begin_scoreCVSS  && (*it)->get_scoreCVSS() <= end_scoreCVSS){
                     arch_expo << endl << (*it)->toExport();
                     //arch_expo << R;
                     tam++;
@@ -288,7 +288,7 @@ void Sistema::cabecalho()
 void Sistema::menu()
 {
     //CHAMA CONSTRUTOR COM NOME DO ARQUIVO
-    Sistema sistema("cve.txt");
+    Sistema sistema("cve2018.txt");
     int op;
     do
     {
