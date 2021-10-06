@@ -232,7 +232,7 @@ void Sistema::exportData(){
     cout << "| DIGITE AS INFORMACOES SOLICITADAS PARA EXPORTAR O ARQUIVO |" << endl;
     
     //PUBLISH DATE
-    cout << endl << "| DIGITE VALOR INICIAL DE PUBLISH DATE DE 2018 |"
+    cout << endl << "DIGITE VALOR INICIAL DE PUBLISH DATE DE 2018"
          << endl << "DIGITE DIA: ";
     fflush(stdin);
     cin >> dia1;
@@ -242,7 +242,7 @@ void Sistema::exportData(){
     string data_inicial = ano1+"-"+mes1+"-"+dia1;
     begin_publishdate = new DATE(data_inicial);
     
-    cout << endl << "| DIGITE VALOR FINAL DE PUBLISH DATE DE 2018 |"
+    cout << endl << "DIGITE VALOR FINAL DE PUBLISH DATE DE 2018"
          << endl << "DIGITE DIA: ";
     fflush(stdin);
     cin >> dia2;
