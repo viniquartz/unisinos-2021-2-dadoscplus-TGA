@@ -53,6 +53,8 @@ public:
     void print_localizarCVE_ID();
     //DESCRIPTION
     void print_localizarDescription();
+    DATE getpublishDate();
+    DATE getupdateDate();
 };
 
 #endif //REGISTRO_H

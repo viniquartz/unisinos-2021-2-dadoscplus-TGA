@@ -43,3 +43,31 @@ int DATE::getStructYEAR(){
     year = this->datahora.tm_year+1900;
     return year;
 }
+
+
+
+bool DATE::operator<= (const DATE &param) {
+        struct tm end_publishdate = this->datahora;
+        struct tm begin_publishdate = param.datahora;
+        return difftime(mktime(&end_publishdate),mktime(&begin_publishdate)) <= 0;
+    }
+bool DATE::operator>= (const DATE &param) {
+        struct tm end_publishdate = this->datahora;
+        struct tm begin_publishdate = param.datahora;
+        return difftime(mktime(&end_publishdate),mktime(&begin_publishdate)) <= 0;
+    }
+bool DATE::operator< (const DATE &param) {
+        struct tm end_publishdate = this->datahora;
+        struct tm begin_publishdate = param.datahora;
+        return difftime(mktime(&end_publishdate),mktime(&begin_publishdate)) <= 0;
+    }
+bool DATE::operator> (const DATE &param) {
+        struct tm end_publishdate = this->datahora;
+        struct tm begin_publishdate = param.datahora;
+        return difftime(mktime(&end_publishdate),mktime(&begin_publishdate)) <= 0;
+    }
+bool DATE::operator== (const DATE &param) {
+        struct tm end_publishdate = this->datahora;
+        struct tm begin_publishdate = param.datahora;
+        return difftime(mktime(&end_publishdate),mktime(&begin_publishdate)) <= 0;
+    }

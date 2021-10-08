@@ -280,13 +280,15 @@ void Sistema::exportData(){
         if(arch_expo.is_open()){
             arch_expo << "CVE ID	CWE ID	Vulnerability Types	Publish Date	Update Date	CVSS Score	Gained Access Level	Access	Complexity	Authentication	Confidentialy	Integrity	Availability	Description";
             for (it = dados.begin(); it != dados.end(); ++it){
-                if((*it)->get_scoreCVSS() >= begin_scoreCVSS  && (*it)->get_scoreCVSS() <= end_scoreCVSS){
-                    //Filtrar intervalo de datas
-                    //if((*it)->publishDate->getStructTM() >= data_inicial && (*it)->publishDate->getStructTM() <= data_final){
-                    arch_expo << endl << (*it)->toExport();
-                    //arch_expo << R;
-                    tam++;
-                    //}
+                if(*end_publishdate > *begin_publishdate){
+                    if((*it)->get_scoreCVSS() >= begin_scoreCVSS  && (*it)->get_scoreCVSS() <= end_scoreCVSS){
+                        //Filtrar intervalo de datas
+                        //if(*end_publishdate <= *begin_publishdate){
+                            arch_expo << endl << (*it)->toExport();
+                            //arch_expo << R;
+                        tam++;
+                       // }
+                    }
                 }
             }
             arch_expo.close();

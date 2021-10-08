@@ -11,7 +11,7 @@ Registro::Registro(){
 int Registro::openedDays(){
     double open;
     open = difftime(mktime(updateDate->getStructTM()),mktime(publishDate->getStructTM()));
-    return open;
+    return open/86400;
 }
 
 //Registro::~Registro(){}
@@ -159,3 +159,4 @@ string Registro::get_availability(){
 string Registro::get_description(){
     return this->description;
 }
+
